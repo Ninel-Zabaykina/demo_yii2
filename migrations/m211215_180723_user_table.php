@@ -25,18 +25,23 @@ class m211215_180723_user_table extends Migration
         return false;
     }
 
-    /*
-    // Use up()/down() to run migration code without a transaction.
+
     public function up()
     {
-
+        $this -> createTable('user', [
+            'id' => $this->primaryKey(),
+            'name'=> $this->string(),
+            'surname'=> $this->string(),
+            'e-mail'=> $this->string()->defaultValue(null),
+            'login'=> $this->string(),
+            'pass'=> $this->string(),
+            'isAdmin'=>$this->string()->defaultValue(0),
+    ]);
     }
 
     public function down()
     {
-        echo "m211215_180723_user_table cannot be reverted.\n";
-
-        return false;
+       $this->dropTable('user');
     }
-    */
+
 }

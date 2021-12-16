@@ -25,18 +25,25 @@ class m211215_180354_app_table extends Migration
         return false;
     }
 
-    /*
-    // Use up()/down() to run migration code without a transaction.
+
     public function up()
     {
+        $this -> createTable('request', [
+            'id' => $this->primaryKey(),
+            'title'=> $this->string(),
+            'body'=> $this->text(),
+            'date'=> $this->dateTime(),
+            'category_id'=> $this->integer(),
+            'user_id'=> $this->integer(),
+            'status'=> $this->integer(),
+            'photo'=> $this->string(),
+    ]);
 
     }
 
     public function down()
     {
-        echo "m211215_180354_app_table cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('request');
     }
-    */
+
 }

@@ -25,11 +25,13 @@ class m211215_180752_categories_table extends Migration
         return false;
     }
 
-    /*
-    // Use up()/down() to run migration code without a transaction.
+
     public function up()
     {
-
+        $this -> createTable('categories', [
+            'id' => $this->primaryKey(),
+            'title'=> $this->string()
+    ]);
     }
 
     public function down()
@@ -38,5 +40,5 @@ class m211215_180752_categories_table extends Migration
 
         return false;
     }
-    */
+
 }
