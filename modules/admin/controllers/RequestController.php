@@ -7,6 +7,9 @@ use app\models\RequestSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
+use app\models\ImageUpload;
+use yii\web\UploadedFile;
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -69,6 +72,7 @@ class RequestController extends Controller
         $model = new Request();
 
         if ($this->request->isPost) {
+
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -129,5 +133,25 @@ class RequestController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionSetImage($id)
+    {
+        $model = new ImageUpload;
+
+        if (Yii::$app->request->isPost) {
+            $file = UploadedFile::getInstance($model, 'image');
+            $model->uploadFile($file);
+        }
+
+
+        return $this->render('image', ['model'=>$model]);
+    }
+
+    public function actionSetCategory($id)
+    {
+        $article = $this->findModel($id);
+        var_dump($article);
+        var_dump($article->getCategory());
     }
 }

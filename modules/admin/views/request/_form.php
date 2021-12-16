@@ -18,15 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
-
-    <div class="form-group">
+      <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
