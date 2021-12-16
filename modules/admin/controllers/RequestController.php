@@ -10,6 +10,9 @@ use yii\filters\VerbFilter;
 use Yii;
 use app\models\ImageUpload;
 use yii\web\UploadedFile;
+use app\models\Categories;
+use yii\helpers\ArrayHelper;
+
 
 /**
  * RequestController implements the CRUD actions for Request model.
@@ -150,8 +153,24 @@ class RequestController extends Controller
 
     public function actionSetCategory($id)
     {
-        $article = $this->findModel($id);
-        var_dump($article);
-        var_dump($article->getCategory());
+        $request = $this->findModel($id);
+        $selectedCategory = $request->category_id;
+        $categories = ArrayHelper::map(Categories::find()->all(), 'id', 'title');
+
+        if (Yii::$app->request->isPost)
+        {
+            $categories = Yii::$app->request->post('category');
+            if($request->saveCategory($categories))
+            {
+                return $this->redirect(['view', 'id'=>$request->id]);
+            }
+        }
+
+        return $this->render('category', [
+            'model'=>$request,
+            'selectedCategory'=>$selectedCategory,
+            'categories'=>$categories
+            ]);
+
     }
 }

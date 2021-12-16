@@ -33,10 +33,11 @@ class Request extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title','body'], 'string'],
-            [['date'], 'date', 'format'=>'php:Y-m-d'],
+            [['title', 'body'], 'string'],
+            [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['date'], 'default', 'value' => date('Y-m-d')],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            [['category_id'], 'number']
 
         ];
     }
@@ -57,6 +58,7 @@ class Request extends \yii\db\ActiveRecord
             'photo' => 'Photo',
         ];
     }
+
     public function saveImage($filename)
     {
         $this->photo = $filename;
@@ -83,5 +85,15 @@ class Request extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+    }
+
+    public function saveCategory($category_id)
+    {
+        $category = Categories::findOne($category_id);
+        if ($category != null) {
+            $this->link('category', $category);
+            return true;
+        }
+
     }
 }
