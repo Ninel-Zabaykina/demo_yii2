@@ -37,7 +37,8 @@ class Request extends \yii\db\ActiveRecord
             [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['date'], 'default', 'value' => date('Y-m-d')],
             [['title'], 'string', 'max' => 255],
-            [['category_id'], 'number']
+            [['category_id'], 'number'],
+            [['photo'], 'string', 'max' => 255]
 
         ];
     }

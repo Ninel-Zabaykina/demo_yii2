@@ -78,4 +78,7 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+    public static function findByUsername($username){
+        return User::find()->where(['name'=>$username])->one();
+    }
 }

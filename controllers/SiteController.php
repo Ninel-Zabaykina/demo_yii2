@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Request;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +62,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $requests = Request::find()
+            ->all();
+        return $this->render('index', ['rr' => $requests]);
+    }
+
+    public function actionView()
+    {
+        return $this->render('single');
+    }
+
+    public function actionCategory()
+    {
+        return $this->render('category');
     }
 
     /**

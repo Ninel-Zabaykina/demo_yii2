@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -19,11 +18,17 @@ class ImageUpload extends Model{
     }
 
 
-    public function uploadFile(UploadedFile $file)
+    public function uploadFile(UploadedFile $file, $currentImage)
     {
        // $file->saveAs('.'.Yii::getAlias('@web').'/uploads/'.$file->name);
-       $file->saveAs('C:/xampp/htdocs/basic/web/uploads/'.$file->name);
+       //$file->saveAs('C:/xampp/htdocs/basic/web/uploads/'.$file->name);
+        $this->image = $file;
 
+        if($this->validate())
+        {
+            $this->deleteCurrentImage($currentImage);
+            return $this->saveImage();
+        }
     }
 
     private function getFolder()
